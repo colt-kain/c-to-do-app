@@ -4,7 +4,7 @@
 
 void display_options()
 {
-  printf("0. Save and quit program\n");
+  printf("0. Quit program\n");
   printf("1. Add a new task item\n");
   printf("2. Remove an existing task item\n");
   printf("3. Display the task list\n");
@@ -27,11 +27,30 @@ void add_task(const char *new_task)
   fclose(to_do_list);
 }
 
+void display_tasks()
+{
+  FILE *to_do_list = fopen("to_do_list.txt", "r");
+
+  if (to_do_list == NULL)
+  {
+    perror("Error opening file");
+    exit(EXIT_FAILURE);
+  }
+
+  char character;
+  while ((character = fgetc(to_do_list)) != EOF)
+    putchar(character);
+
+  printf("\n");
+
+  fclose(to_do_list);
+}
+
 int main()
 {
-  int user_choice = -1;
+  int user_choice;
 
-  while (user_choice != 0)
+  do
   {
     display_options();
 
@@ -61,12 +80,10 @@ int main()
         break;
 
       case 1:
-        const int TASK_MAX_LENGTH = 50;
-
-        char new_task[TASK_MAX_LENGTH];
+        char new_task[50];
         
         printf("New task: ");
-        if (fgets(new_task, TASK_MAX_LENGTH, stdin) == NULL)
+        if (fgets(new_task, 50, stdin) == NULL)
         {
           perror("Error reading input");
           exit(EXIT_FAILURE);
@@ -83,8 +100,13 @@ int main()
         add_task(new_task);
 
         break;
+
+      case 3:
+        display_tasks();
+        break;
     }
-  }
+
+  } while (user_choice != 0);
 
   return 0;
 }
