@@ -1,5 +1,6 @@
 # Ignore the output of the compilation process
 to_do
 
-# Ignore the 'database' text file used in this program
+# Ignore the text files created by running the program 
 to_do_list.txt
+temporary.txt
