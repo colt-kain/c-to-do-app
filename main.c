@@ -72,10 +72,10 @@ int main()
         break;
 
       case 2:
-        int task_to_delete;
+        int task_number;
 
         printf("Task to remove (number): ");
-        if (scanf("%d", &task_to_delete) != 1)
+        if (scanf("%d", &task_number) != 1)
         {
           printf("\nWrong format inputted.\nPlease provide an integer.\n\n");
 
@@ -86,7 +86,10 @@ int main()
         else
           printf("\n");
 
-        remove_task(task_to_delete);
+        if (task_number < 1)
+          printf("Invalid task number.\n\n");
+        else
+          remove_task(task_number);
 
         break;
 
